@@ -12,10 +12,11 @@ export class NavbarComponent {
   isMobileMenuOpen:boolean = false;
   currentPage = 'home';
 
+
   constructor(private router: Router) { }
 
   isLoggedIn(): boolean {
-    return false;
+    this.isLoggedIn 
   }
 
   toggleDropdown(): void {
@@ -45,6 +46,22 @@ export class NavbarComponent {
   navigateToContactUs() {
     this.router.navigate(['/contact-us']);
     this.currentPage = 'contact-us';
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+    this.currentPage = 'login';
+  }
+
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+    this.currentPage = 'register';
+  }
+
+  signOut() {
+    this.router.navigate(['/home']);
+    this.currentPage = 'home';
+
   }
 
 }
