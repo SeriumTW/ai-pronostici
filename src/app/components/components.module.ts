@@ -10,6 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
        declarations: [
               FooterComponent,
@@ -21,10 +22,11 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
               ContactComponent,
               LoginComponent,
               RegisterComponent,
-              ChatbotComponent
+              ChatbotComponent,
        ],
        imports: [
-              CommonModule
+              CommonModule,
+              ReactiveFormsModule
        ],
        exports: [
               FooterComponent,

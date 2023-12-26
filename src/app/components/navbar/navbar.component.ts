@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthFacade } from '../../facades/auth.facade';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -7,60 +9,57 @@ import { Router } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  isLogged$: Observable<boolean> = this.authFacade.isLoggedIn$;
   isDropdownOpen: boolean = false;
-  
   isMobileMenuOpen:boolean = false;
   currentPage = 'home';
 
-
-  constructor(private router: Router) { }
-
-  isLoggedIn(): boolean {
-    this.isLoggedIn 
-  }
+  constructor(private router: Router,
+    private authFacade: AuthFacade) { }
 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  toggleMobileMenu() {
+  toggleMobileMenu(): void {
     console.log('toggleDropdown');
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  navigateToHome() {
+  navigateToHome(): void {
     this.router.navigate(['/home']);
     this.currentPage = 'home';
   }
 
-  navigateToHowItWorks() {
+  navigateToHowItWorks(): void {
     this.router.navigate(['/how-it-works']);
     this.currentPage = 'how-it-works';
   }
 
-  navigateToSubscribe() {
+  navigateToSubscribe(): void {
     this.router.navigate(['/subscribe']);
     this.currentPage = 'subscribe';
   }
 
-  navigateToContactUs() {
+  navigateToContactUs(): void {
     this.router.navigate(['/contact-us']);
     this.currentPage = 'contact-us';
   }
 
-  navigateToLogin() {
+  navigateToLogin(): void {
     this.router.navigate(['/login']);
     this.currentPage = 'login';
   }
 
-  navigateToRegister() {
+  navigateToRegister(): void {
     this.router.navigate(['/register']);
     this.currentPage = 'register';
   }
 
-  signOut() {
-    this.router.navigate(['/home']);
+  logout(): void {
+    this.authFacade.logout();
     this.currentPage = 'home';
+    this.router.navigate(['/home']);
 
   }
 

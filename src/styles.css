@@ -21,12 +21,9 @@ body {
   height: 100%;
   width: 100%;
   z-index: -1;
-  background: -webkit-linear-gradient(transparent, transparent), url(http://html5book.ru/wp-content/uploads/2016/08/bubbles.png) repeat;
-  background-image: url(https://themitchellorganization.com/soccer.jpg);
-
+  background-image: url(https://salmonsoccer.com/wp-content/uploads/42.jpg);
   background-size: cover;
-  background-position: top;
-  animation: background 10s infinite linear;
+  background-position: center;
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -50,23 +47,5 @@ body {
     border-radius: 10px;
     border: 3px solid #ffffff;
   }
-
-  /* Aggiungi queste regole CSS al tuo foglio di stile */
-  @keyframes background {
-    from {
-      background-position: 0 0%;
-    }
-    to {
-      background-position: 0 -200px;
-    }
-  }
-  h2 {
-    background: -webkit-linear-gradient(transparent, transparent), url(http://html5book.ru/wp-content/uploads/2016/08/bubbles.png) repeat;
-    background-size: 200px auto;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    animation: background 10s infinite linear;
-  }
-
-
+ 
   

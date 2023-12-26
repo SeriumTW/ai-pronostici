@@ -1,30 +1,51 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { AuthApiService } from '../api/auth-api.service';
+import { AuthStoreService } from '../store/auth.store';
+import { Observable } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthFacade {
-  private _isLoggedIn = new BehaviorSubject<boolean>(false);
+  isLoggedIn$: Observable<boolean>;
 
-  get isLoggedIn() {
-    return this._isLoggedIn.asObservable();
+  constructor(private router: Router, private authApiService: AuthApiService, private authStoreService: AuthStoreService) {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      this.authStoreService.setLoggedIn(true);
+    }
+    this.isLoggedIn$ = this.authStoreService.isLoggedIn;
+
+    const currentUrl = this.router.url;
+    localStorage.setItem('lastUrl', currentUrl);
+
+    const lastUrl = localStorage.getItem('lastUrl');
+    if (lastUrl) {
+      this.router.navigateByUrl(lastUrl);
+    }
   }
 
   login(email: string, password: string) {
-    // Implement your login logic here
-    // For example, you might call a login API and store the returned token
-    this._isLoggedIn.next(true);
+    this.authApiService.login(email, password).pipe(
+      map(users => {
+        const user = users.find((user: { email: string; password: string; }) => user.email === email && user.password === password);
+        if (user) {
+          localStorage.setItem('authToken', user.token);
+          this.authStoreService.setLoggedIn(true);
+          const lastUrl = localStorage.getItem('lastUrl') || '/home';
+          this.router.navigateByUrl(lastUrl);
+          return user;
+        } else {
+          throw new Error('Invalid email or password');
+        }
+      })
+    ).subscribe();
   }
-
-  register(email: string, password: string) {
-    // Implement your registration logic here
-    // For example, you might call a registration API
-  }
-
   logout() {
-    // Implement your logout logic here
-    // For example, you might clear the stored token
-    this._isLoggedIn.next(false);
+    localStorage.removeItem('authToken');
+    this.authStoreService.setLoggedIn(false);
+    // Stay on the same page after logout
   }
 }
