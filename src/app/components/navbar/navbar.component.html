@@ -42,10 +42,10 @@
           </svg>
         </button>
       </div>
-      <div class="flex flex-shrink-0 items-center">
+      <div class="hidden sm:flex flex-shrink-0 items-center">
         <img
-          class="h-14 w-auto"
-          src="../../../../assets/images/logo.png"
+          class="h-32 w-auto p-2 hidden sm:block"
+          src="../../../../assets/images/logo-bianco.png"
           alt="Your Company"
         />
       </div>
@@ -54,52 +54,58 @@
       >
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a
+            <button
               (click)="navigateToHome()"
               class="rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-              [class.bg-gray-900]="currentPage === 'home'"
-              [class.text-white]="currentPage === 'home'"
-              [class.text-gray-300]="currentPage !== 'home'"
-              [class.hover:bg-gray-700]="currentPage !== 'home'"
-              [class.hover:text-white]="currentPage !== 'home'"
-              [attr.aria-current]="currentPage === 'home' ? 'page' : null"
-              >Home</a
+              [class.bg-gray-900]="currentPage === '/home'"
+              [class.text-white]="currentPage === '/home'"
+              [class.text-gray-300]="currentPage !== '/home'"
+              [class.hover:bg-gray-700]="currentPage !== '/home'"
+              [class.hover:text-white]="currentPage !== '/home'"
+              [attr.aria-current]="currentPage === '/home' ? 'page' : null"
             >
-            <a
+              Home
+            </button>
+            <button
               (click)="navigateToHowItWorks()"
               class="rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-              [class.bg-gray-900]="currentPage === 'how-it-works'"
-              [class.text-white]="currentPage === 'how-it-works'"
-              [class.text-gray-300]="currentPage !== 'how-it-works'"
-              [class.hover:bg-gray-700]="currentPage !== 'how-it-works'"
-              [class.hover:text-white]="currentPage !== 'how-it-works'"
+              [class.bg-gray-900]="currentPage === '/how-it-works'"
+              [class.text-white]="currentPage === '/how-it-works'"
+              [class.text-gray-300]="currentPage !== '/how-it-works'"
+              [class.hover:bg-gray-700]="currentPage !== '/how-it-works'"
+              [class.hover:text-white]="currentPage !== '/how-it-works'"
               [attr.aria-current]="
-                currentPage === 'how-it-works' ? 'page' : null
+                currentPage === '/how-it-works' ? 'page' : null
               "
-              >Come funziona</a
             >
-            <a
+              Come funziona
+            </button>
+            <button
               (click)="navigateToSubscribe()"
               class="rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-              [class.bg-gray-900]="currentPage === 'subscribe'"
-              [class.text-white]="currentPage === 'subscribe'"
-              [class.text-gray-300]="currentPage !== 'subscribe'"
-              [class.hover:bg-gray-700]="currentPage !== 'subscribe'"
-              [class.hover:text-white]="currentPage !== 'subscribe'"
-              [attr.aria-current]="currentPage === 'subscribe' ? 'page' : null"
-              >Abbonati</a
+              [class.bg-gray-900]="currentPage === '/subscribe'"
+              [class.text-white]="currentPage === '/subscribe'"
+              [class.text-gray-300]="currentPage !== '/subscribe'"
+              [class.hover:bg-gray-700]="currentPage !== '/subscribe'"
+              [class.hover:text-white]="currentPage !== '/subscribe'"
+              [attr.aria-current]="currentPage === '/subscribe' ? 'page' : null"
             >
-            <a
+              Abbonati
+            </button>
+            <button
               (click)="navigateToContactUs()"
               class="rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-              [class.bg-gray-900]="currentPage === 'contact-us'"
-              [class.text-white]="currentPage === 'contact-us'"
-              [class.text-gray-300]="currentPage !== 'contact-us'"
-              [class.hover:bg-gray-700]="currentPage !== 'contact-us'"
-              [class.hover:text-white]="currentPage !== 'contact-us'"
-              [attr.aria-current]="currentPage === 'contact-us' ? 'page' : null"
-              >Contattaci</a
+              [class.bg-gray-900]="currentPage === '/contact-us'"
+              [class.text-white]="currentPage === '/contact-us'"
+              [class.text-gray-300]="currentPage !== '/contact-us'"
+              [class.hover:bg-gray-700]="currentPage !== '/contact-us'"
+              [class.hover:text-white]="currentPage !== '/contact-us'"
+              [attr.aria-current]="
+                currentPage === '/contact-us' ? 'page' : null
+              "
             >
+              Contattaci
+            </button>
           </div>
         </div>
       </div>
@@ -134,30 +140,33 @@
             aria-labelledby="user-menu-button"
             tabindex="-1"
           >
-            <a
+            <button
               href="#"
               class="block px-4 py-2 text-sm text-gray-700"
               role="menuitem"
               tabindex="-1"
               id="user-menu-item-0"
-              >Your Profile</a
             >
-            <a
+              Your Profile
+            </button>
+            <button
               href="#"
               class="block px-4 py-2 text-sm text-gray-700"
               role="menuitem"
               tabindex="-1"
               id="user-menu-item-1"
-              >Settings</a
             >
-            <a
+              Settings
+            </button>
+            <button
               class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
               role="menuitem"
               tabindex="-1"
               id="user-menu-item-2"
               (click)="logout()"
-              >Logout</a
             >
+              Logout
+            </button>
           </div>
         </div>
 
@@ -187,50 +196,54 @@
   <div *ngIf="isMobileMenuOpen" class="sm:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <a
+      <button
         (click)="navigateToHome()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === 'home'"
-        [class.text-white]="currentPage === 'home'"
-        [class.text-gray-300]="currentPage !== 'home'"
-        [class.hover:bg-gray-700]="currentPage !== 'home'"
-        [class.hover:text-white]="currentPage !== 'home'"
-        [attr.aria-current]="currentPage === 'home' ? 'page' : null"
-        >Home</a
+        [class.bg-gray-900]="currentPage === '/home'"
+        [class.text-white]="currentPage === '/home'"
+        [class.text-gray-300]="currentPage !== '/home'"
+        [class.hover:bg-gray-700]="currentPage !== '/home'"
+        [class.hover:text-white]="currentPage !== '/home'"
+        [attr.aria-current]="currentPage === '/home' ? 'page' : null"
       >
-      <a
+        Home
+      </button>
+      <button
         (click)="navigateToHowItWorks()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === 'how-it-works'"
-        [class.text-white]="currentPage === 'how-it-works'"
-        [class.text-gray-300]="currentPage !== 'how-it-works'"
-        [class.hover:bg-gray-700]="currentPage !== 'how-it-works'"
-        [class.hover:text-white]="currentPage !== 'how-it-works'"
-        [attr.aria-current]="currentPage === 'how-it-works' ? 'page' : null"
-        >Come funziona</a
+        [class.bg-gray-900]="currentPage === '/how-it-works'"
+        [class.text-white]="currentPage === '/how-it-works'"
+        [class.text-gray-300]="currentPage !== '/how-it-works'"
+        [class.hover:bg-gray-700]="currentPage !== '/how-it-works'"
+        [class.hover:text-white]="currentPage !== '/how-it-works'"
+        [attr.aria-current]="currentPage === '/how-it-works' ? 'page' : null"
       >
-      <a
+        Come funziona
+      </button>
+      <button
         (click)="navigateToSubscribe()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === 'subscribe'"
-        [class.text-white]="currentPage === 'subscribe'"
-        [class.text-gray-300]="currentPage !== 'subscribe'"
-        [class.hover:bg-gray-700]="currentPage !== 'subscribe'"
-        [class.hover:text-white]="currentPage !== 'subscribe'"
-        [attr.aria-current]="currentPage === 'subscribe' ? 'page' : null"
-        >Abbonati</a
+        [class.bg-gray-900]="currentPage === '/subscribe'"
+        [class.text-white]="currentPage === '/subscribe'"
+        [class.text-gray-300]="currentPage !== '/subscribe'"
+        [class.hover:bg-gray-700]="currentPage !== '/subscribe'"
+        [class.hover:text-white]="currentPage !== '/subscribe'"
+        [attr.aria-current]="currentPage === '/subscribe' ? 'page' : null"
       >
-      <a
+        Abbonati
+      </button>
+      <button
         (click)="navigateToContactUs()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === 'contact-us'"
-        [class.text-white]="currentPage === 'contact-us'"
-        [class.text-gray-300]="currentPage !== 'contact-us'"
-        [class.hover:bg-gray-700]="currentPage !== 'contact-us'"
-        [class.hover:text-white]="currentPage !== 'contact-us'"
-        [attr.aria-current]="currentPage === 'contact-us' ? 'page' : null"
-        >Contattaci</a
+        [class.bg-gray-900]="currentPage === '/contact-us'"
+        [class.text-white]="currentPage === '/contact-us'"
+        [class.text-gray-300]="currentPage !== '/contact-us'"
+        [class.hover:bg-gray-700]="currentPage !== '/contact-us'"
+        [class.hover:text-white]="currentPage !== '/contact-us'"
+        [attr.aria-current]="currentPage === '/contact-us' ? 'page' : null"
       >
+        Contattaci
+      </button>
     </div>
   </div>
 </nav>

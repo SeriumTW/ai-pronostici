@@ -10,7 +10,6 @@ import { filter, map } from 'rxjs/operators';
 })
 export class AuthFacade {
   isLoggedIn$: Observable<boolean>;
-
   constructor(private router: Router, private authApiService: AuthApiService, private authStoreService: AuthStoreService) {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -18,14 +17,18 @@ export class AuthFacade {
     }
     this.isLoggedIn$ = this.authStoreService.isLoggedIn;
 
-    const currentUrl = this.router.url;
-    localStorage.setItem('lastUrl', currentUrl);
-
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      localStorage.setItem('lastUrl', event.urlAfterRedirects);
+    });
+  
     const lastUrl = localStorage.getItem('lastUrl');
     if (lastUrl) {
       this.router.navigateByUrl(lastUrl);
     }
   }
+
 
   login(email: string, password: string) {
     this.authApiService.login(email, password).pipe(
