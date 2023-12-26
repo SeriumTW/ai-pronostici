@@ -26,6 +26,14 @@ body {
   background-position: center;
 }
 
+button{
+  transition: 0.4s;
+}
+
+button:hover{
+  transform: scale(1.055);
+}
+
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
   * {
