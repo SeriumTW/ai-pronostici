@@ -41,11 +41,7 @@ export class AuthFacade {
     this.authApiService
       .login(email, password)
       .pipe(
-        map((users) => {
-          const user = users.find(
-            (user: { email: string; password: string }) =>
-              user.email === email && user.password === password
-          );
+        map((user) => {
           if (user) {
             localStorage.setItem('authToken', user.token);
             this.authStoreService.setLoggedIn(true);

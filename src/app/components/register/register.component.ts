@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
     });
   }
 
@@ -30,6 +29,7 @@ export class RegisterComponent implements OnInit {
 
   onRegister(): void {
     if (this.registerForm.valid) {
+      console.log('valid');
       const { firstName, lastName, email, password, username } =
         this.registerForm.value;
       console.log(firstName, lastName, email, password, username);
