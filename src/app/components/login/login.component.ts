@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthFacade } from '../../facades/auth.facade';
 
@@ -19,9 +19,7 @@ export class LoginComponent {
 
   onLogin(): void {
     if (this.loginForm.valid) {
-      console.log('valid');
       const { email, password } = this.loginForm.value;
-      console.log(email, password);
       this.authFacade.login(email, password);
     }
   }

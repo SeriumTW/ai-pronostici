@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthFacade } from '../../facades/auth.facade';
+import { User } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-register',
@@ -29,11 +25,8 @@ export class RegisterComponent implements OnInit {
 
   onRegister(): void {
     if (this.registerForm.valid) {
-      console.log('valid');
-      const { firstName, lastName, email, password, username } =
-        this.registerForm.value;
-      console.log(firstName, lastName, email, password, username);
-      this.authFacade.register(firstName, lastName, email, password, username);
+      const user: User = this.registerForm.value;
+      this.authFacade.register(user);
     }
   }
 }

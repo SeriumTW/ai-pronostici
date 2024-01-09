@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AuthApiService } from '../api/auth-api.service';
 import { AuthStoreService } from '../store/auth.store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
+import { User } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthFacade {
-  isLoggedIn$: Observable<boolean>;
+export class AuthFacade implements OnDestroy {
+  private subscriptions: Subscription = new Subscription();
+
+  isLoggedIn$: Observable<boolean> = this.authStoreService.isLoggedIn$;
+  User$: Observable<User> = this.authStoreService.userData$;
   constructor(
     private router: Router,
     private authApiService: AuthApiService,
@@ -19,9 +23,14 @@ export class AuthFacade {
     if (token) {
       this.authStoreService.setLoggedIn(true);
     }
-    this.isLoggedIn$ = this.authStoreService.isLoggedIn;
 
-    this.router.events
+    const userJson = localStorage.getItem('user');
+    if (userJson) {
+      const user: User = JSON.parse(userJson);
+      this.authStoreService.setUser(user);
+    }
+
+    const routerSubscription = this.router.events
       .pipe(
         filter(
           (event): event is NavigationEnd => event instanceof NavigationEnd
@@ -31,57 +40,86 @@ export class AuthFacade {
         localStorage.setItem('lastUrl', event.urlAfterRedirects);
       });
 
+    this.subscriptions.add(routerSubscription);
+
     const lastUrl = localStorage.getItem('lastUrl');
     if (lastUrl) {
       this.router.navigateByUrl(lastUrl);
     }
   }
 
-  login(email: string, password: string) {
-    this.authApiService
+  login(email: string, password: string): void {
+    const loginSubscription = this.authApiService
       .login(email, password)
       .pipe(
-        map((user) => {
+        tap((user) => {
           if (user) {
-            localStorage.setItem('authToken', user.token);
+            user.password = '';
+            localStorage.setItem('authToken', JSON.stringify(user));
+            this.getUserData(user.id);
             this.authStoreService.setLoggedIn(true);
             this.router.navigateByUrl('/home');
-            return user;
           } else {
             throw new Error('Invalid email or password');
           }
         })
       )
       .subscribe();
+
+    this.subscriptions.add(loginSubscription);
   }
 
-  register(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    username: string
-  ) {
-    this.authApiService
-      .register(firstName, lastName, email, password, username)
+  register(user: User): void {
+    user.img =
+      'https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg';
+
+    const registerSubscription = this.authApiService
+      .register(user)
       .pipe(
-        map((user) => {
+        tap((user) => {
           if (user) {
-            localStorage.setItem('authToken', user.token);
+            user.password = '';
+            localStorage.setItem('authToken', JSON.stringify(user));
+            this.getUserData(user.id);
             this.authStoreService.setLoggedIn(true);
             this.router.navigateByUrl('/home');
-            return user;
           } else {
             throw new Error('Registration failed');
           }
         })
       )
       .subscribe();
+
+    this.subscriptions.add(registerSubscription);
+  }
+
+  getUserData(idUser: number): void {
+    const userDataSubscription = this.authApiService
+      .getUserByUsername(idUser)
+      .pipe(
+        map((user: User) => {
+          if (user) {
+            user.password = '';
+            this.authStoreService.setUser(user);
+            localStorage.setItem('user', JSON.stringify(user));
+            return user;
+          } else {
+            throw new Error('User not found');
+          }
+        })
+      )
+      .subscribe();
+
+    this.subscriptions.add(userDataSubscription);
   }
 
   logout() {
-    localStorage.removeItem('authToken');
     this.authStoreService.setLoggedIn(false);
-    // Stay on the same page after logout
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

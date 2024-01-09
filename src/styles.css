@@ -1,12 +1,11 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   background-color: #000000;
+  scroll-behavior: smooth;
 }
 
 .glass-effect {
@@ -25,34 +24,24 @@ body {
   background-position: center;
 }
 
-button{
-  transition: 0.4s;
-}
-
-button:hover{
-  transform: scale(1.055);
-}
-
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #ff8400 #ffffff;
-  }
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ff8400 #ffffff;
+}
 
-  /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 16px;
-  }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
 
-  *::-webkit-scrollbar-track {
-    background: #ffffff;
-  }
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: #ff8400;
-    border-radius: 10px;
-    border: 3px solid #ffffff;
-  }
- 
-  
+*::-webkit-scrollbar-thumb {
+  background-color: #ff8400;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}

@@ -7,6 +7,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { AccountComponent } from './components/account/account.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,11 +17,12 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'chatbot', component: ChatbotComponent }
+  { path: 'chatbot', component: ChatbotComponent },
+  { path: 'account', component: AccountComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
