@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class DropdownService {
-  private isDropdownOpen = new BehaviorSubject<boolean>(false);
+  isDropdownOpen = new BehaviorSubject<boolean>(false);
   isDropdownOpen$ = this.isDropdownOpen.asObservable();
 
   toggleDropdown(open: boolean) {

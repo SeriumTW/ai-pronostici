@@ -1,4 +1,6 @@
-<nav class="bg-gray-800">
+<nav
+  class="fixed w-full z-10 bg-opacity-60 bg-gray-900 backdrop-filter backdrop-blur-lg"
+>
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -57,10 +59,10 @@
             <button
               (click)="navigateToHome()"
               class="rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-              [class.bg-gray-900]="currentPage === '/home'"
+              [class.bg-blue-500]="currentPage === '/home'"
               [class.text-white]="currentPage === '/home'"
               [class.text-gray-300]="currentPage !== '/home'"
-              [class.hover:bg-gray-700]="currentPage !== '/home'"
+              [class.hover:bg-blue-700]="currentPage !== '/home'"
               [class.hover:text-white]="currentPage !== '/home'"
               [attr.aria-current]="currentPage === '/home' ? 'page' : null"
             >
@@ -69,10 +71,10 @@
             <button
               (click)="navigateToHowItWorks()"
               class="rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-              [class.bg-gray-900]="currentPage === '/how-it-works'"
+              [class.bg-blue-500]="currentPage === '/how-it-works'"
               [class.text-white]="currentPage === '/how-it-works'"
               [class.text-gray-300]="currentPage !== '/how-it-works'"
-              [class.hover:bg-gray-700]="currentPage !== '/how-it-works'"
+              [class.hover:bg-blue-700]="currentPage !== '/how-it-works'"
               [class.hover:text-white]="currentPage !== '/how-it-works'"
               [attr.aria-current]="
                 currentPage === '/how-it-works' ? 'page' : null
@@ -83,10 +85,10 @@
             <button
               (click)="navigateToSubscribe()"
               class="rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-              [class.bg-gray-900]="currentPage === '/subscribe'"
+              [class.bg-blue-500]="currentPage === '/subscribe'"
               [class.text-white]="currentPage === '/subscribe'"
               [class.text-gray-300]="currentPage !== '/subscribe'"
-              [class.hover:bg-gray-700]="currentPage !== '/subscribe'"
+              [class.hover:bg-blue-700]="currentPage !== '/subscribe'"
               [class.hover:text-white]="currentPage !== '/subscribe'"
               [attr.aria-current]="currentPage === '/subscribe' ? 'page' : null"
             >
@@ -194,10 +196,10 @@
       <button
         (click)="navigateToHome()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === '/home'"
+        [class.bg-blue-500]="currentPage === '/home'"
         [class.text-white]="currentPage === '/home'"
         [class.text-gray-300]="currentPage !== '/home'"
-        [class.hover:bg-gray-700]="currentPage !== '/home'"
+        [class.hover:bg-blue-700]="currentPage !== '/home'"
         [class.hover:text-white]="currentPage !== '/home'"
         [attr.aria-current]="currentPage === '/home' ? 'page' : null"
       >
@@ -206,10 +208,10 @@
       <button
         (click)="navigateToHowItWorks()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === '/how-it-works'"
+        [class.bg-blue-500]="currentPage === '/how-it-works'"
         [class.text-white]="currentPage === '/how-it-works'"
         [class.text-gray-300]="currentPage !== '/how-it-works'"
-        [class.hover:bg-gray-700]="currentPage !== '/how-it-works'"
+        [class.hover:bg-blue-700]="currentPage !== '/how-it-works'"
         [class.hover:text-white]="currentPage !== '/how-it-works'"
         [attr.aria-current]="currentPage === '/how-it-works' ? 'page' : null"
       >
@@ -218,10 +220,10 @@
       <button
         (click)="navigateToSubscribe()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === '/subscribe'"
+        [class.bg-blue-500]="currentPage === '/subscribe'"
         [class.text-white]="currentPage === '/subscribe'"
         [class.text-gray-300]="currentPage !== '/subscribe'"
-        [class.hover:bg-gray-700]="currentPage !== '/subscribe'"
+        [class.hover:bg-blue-700]="currentPage !== '/subscribe'"
         [class.hover:text-white]="currentPage !== '/subscribe'"
         [attr.aria-current]="currentPage === '/subscribe' ? 'page' : null"
       >
@@ -230,10 +232,10 @@
       <!-- <button
         (click)="navigateToContactUs()"
         class="rounded-md block px-3 py-2 text-base font-medium"
-        [class.bg-gray-900]="currentPage === '/contact-us'"
+        [class.bg-blue-500]="currentPage === '/contact-us'"
         [class.text-white]="currentPage === '/contact-us'"
         [class.text-gray-300]="currentPage !== '/contact-us'"
-        [class.hover:bg-gray-700]="currentPage !== '/contact-us'"
+        [class.hover:bg-blue-700]="currentPage !== '/contact-us'"
         [class.hover:text-white]="currentPage !== '/contact-us'"
         [attr.aria-current]="currentPage === '/contact-us' ? 'page' : null"
       >

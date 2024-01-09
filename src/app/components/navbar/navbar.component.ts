@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthFacade } from '../../facades/auth.facade';
 import { DropdownService } from '../../services/dropdown.service';
@@ -20,7 +20,8 @@ export class NavbarComponent {
   constructor(
     private router: Router,
     private authFacade: AuthFacade,
-    private dropdownService: DropdownService
+    private dropdownService: DropdownService,
+    private eRef: ElementRef
   ) {
     this.router.events
       .pipe(
@@ -36,6 +37,13 @@ export class NavbarComponent {
     this.dropdownService.isDropdownOpen$.subscribe((isOpen) => {
       this.isDropdownOpen = isOpen;
     });
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: Event) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.dropdownService.toggleDropdown(false);
+    }
   }
 
   toggleDropdown(): void {
