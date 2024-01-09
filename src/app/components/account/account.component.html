@@ -1,34 +1,23 @@
-<div class="container mx-auto p-4">
-  <!-- Sezione Profilo Utente -->
+<div class="container mx-auto p-4" *ngIf="userProfile$ | async as user">
   <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
     <h2 class="text-2xl mb-4 font-semibold text-gray-800">Profilo Utente</h2>
     <div class="flex flex-wrap md:flex-nowrap gap-4">
-      <!-- Foto Profilo -->
-      <div class="mb-4 md:mb-0">
-        <div
-          *ngIf="!isEditing"
-          class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border border-gray-300"
-        >
-          <img
-            [src]="userProfile.imageUrl"
-            alt="Foto Profilo"
-            class="w-full h-full object-cover"
-          />
-        </div>
-        <div *ngIf="isEditing">
-          <!-- <input type="file" (change)="onFileSelected($event)" class="mt-2" /> -->
-        </div>
+      <div
+        class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border border-gray-300"
+      >
+        <img
+          [src]="user.img"
+          alt="Profilo utente"
+          class="w-full h-full object-cover"
+        />
       </div>
-
-      <!-- Dati Utente -->
       <div class="flex-grow">
         <div *ngIf="!isEditing">
-          <!-- Visualizzazione dei dati -->
-          <p>Nome: {{ userProfile.name }}</p>
-          <p>Cognome: {{ userProfile.surname }}</p>
-          <p>Username: {{ userProfile.username }}</p>
-          <p>Data Account: {{ userProfile.accountCreation | date }}</p>
-          <p>Email: {{ userProfile.email }}</p>
+          <p>Nome: {{ user.firstname }}</p>
+          <p>Cognome: {{ user.lastname }}</p>
+          <p>Username: {{ user.username }}</p>
+          <p>Data Account: {{ user.startDate | date : "dd/MM/yyyy" }}</p>
+          <p>Email: {{ user.email }}</p>
           <button
             (click)="enableEditing()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
@@ -37,76 +26,8 @@
           </button>
         </div>
         <div *ngIf="isEditing">
-          <!-- Modulo di modifica -->
           <form (ngSubmit)="onSubmit()">
-            <div class="grid grid-cols-1 gap-4">
-              <div class="mb-4">
-                <label
-                  class="block text-gray-700 text-sm font-bold mb-2"
-                  for="nome"
-                >
-                  Nome
-                </label>
-                <input
-                  name="nome"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  type="text"
-                />
-              </div>
-              <div class="mb-4">
-                <label
-                  class="block text-gray-700 text-sm font-bold mb-2"
-                  for="cognome"
-                >
-                  Cognome
-                </label>
-                <input
-                  name="cognome"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  type="text"
-                />
-              </div>
-              <div class="mb-4">
-                <label
-                  class="block text-gray-700 text-sm font-bold mb-2"
-                  for="username"
-                >
-                  Username
-                </label>
-                <input
-                  name="username"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  type="text"
-                />
-              </div>
-              <div class="mb-4">
-                <label
-                  class="block text-gray-700 text-sm font-bold mb-2"
-                  for="email"
-                >
-                  Email
-                </label>
-                <input
-                  name="email"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  type="email"
-                />
-              </div>
-              <!-- Campo opzionale per la password, rimuovere se non necessario -->
-              <div class="mb-4">
-                <label
-                  class="block text-gray-700 text-sm font-bold mb-2"
-                  for="password"
-                >
-                  Password (lasciare vuoto se non si desidera modificare)
-                </label>
-                <input
-                  name="password"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  type="password"
-                />
-              </div>
-            </div>
+            <!-- Aggiungi qui i campi del form per la modifica -->
             <button
               type="submit"
               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
@@ -126,28 +47,37 @@
     <div class="mb-4">
       <p class="text-gray-700 m-2">
         Stato Abbonamento:
-        <span class="bg-green-500 py-1 px-2 rounded text-white text-sm"
-          >Attivo</span
+        <span
+          [ngClass]="{
+            'bg-green-500': abbonamento.status === 'ATTIVO',
+            'bg-red-500': abbonamento.status === 'NON ATTIVO'
+          }"
+          class="py-1 px-2 rounded text-white text-sm"
         >
+          {{ abbonamento.status }}
+        </span>
       </p>
       <p class="text-gray-700 m-2">
         Membro dal:
-        <span class="bg-gray-500 py-1 px-2 rounded text-white text-sm"
-          >Nov 07, 2016</span
-        >
+        <span class="bg-gray-500 py-1 px-2 rounded text-white text-sm">
+          {{ abbonamento.startDate | date : "dd/MM/yyyy" }}
+        </span>
       </p>
     </div>
     <div class="flex gap-4">
       <button
+        (click)="renewSubscription()"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Sottoscrivi/Rinnova
       </button>
       <button
+        (click)="cancelSubscription()"
         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
       >
         Disdici
       </button>
     </div>
   </div>
+  >
 </div>

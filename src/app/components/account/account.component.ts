@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface UserProfile {
-  name: string;
-  surname: string;
-  username: string;
-  accountCreation: Date;
-  email: string;
-  imageUrl: string;
-  // password: string; // Aggiungi solo se necessario
-}
+import { User } from '../../interfaces/user.interface';
+import { AuthFacade } from '../../facades/auth.facade';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-account',
@@ -17,36 +10,27 @@ export interface UserProfile {
 })
 export class AccountComponent implements OnInit {
   isEditing: boolean = false;
-  userProfile!: UserProfile;
+  userProfile$: Observable<Partial<User>> = this.authFacade.User$;
+  abbonamento = {
+    status: 'ATTIVO',
+    startDate: new Date(2022, 1, 1),
+  };
+  constructor(private authFacade: AuthFacade) {}
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.userProfile = {
-      name: 'Mario',
-      surname: 'Rossi',
-      username: 'mario.rossi',
-      accountCreation: new Date(), // Sostituisci con dati reali
-      email: 'mario.rossi@example.com',
-      imageUrl: 'path_to_image.jpg',
-      // password: '', // Aggiungi solo se necessario
-    };
-  }
+  ngOnInit(): void {}
 
   enableEditing(): void {
     this.isEditing = true;
   }
 
   onSubmit(): void {
-    // Logica per inviare i dati modificati al server
-    // Ad esempio, utilizza un servizio Angular per effettuare la richiesta HTTP
-    console.log('Dati inviati:', this.userProfile);
     this.isEditing = false;
   }
 
-  // onFileSelected(event): void {
-  //   // Logica per gestire il file selezionato
-  //   // Ad esempio, caricare l'immagine su un server e aggiornare `userProfile.imageUrl`
-  //   console.log('File selezionato:', event.target.files[0]);
-  // }
+  renewSubscription() {
+    console.log('renewSubscription');
+  }
+  cancelSubscription() {
+    console.log('cancelSubscription');
+  }
 }

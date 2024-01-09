@@ -7,7 +7,7 @@ import { User } from '../interfaces/user.interface';
 })
 export class AuthStoreService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
-  private userDataSubject = new BehaviorSubject<any>(null);
+  private userDataSubject = new BehaviorSubject<Partial<User>>({});
 
   get isLoggedIn$() {
     return this.isLoggedInSubject.asObservable();

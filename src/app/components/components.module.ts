@@ -11,27 +11,23 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccountComponent } from './account/account.component';
+
 @NgModule({
-       declarations: [
-              FooterComponent,
-              NavbarComponent,
-              HeaderComponent,
-              HomeComponent,
-              SubscriptionComponent,
-              HowItWorksComponent,
-              ContactComponent,
-              LoginComponent,
-              RegisterComponent,
-              ChatbotComponent,
-       ],
-       imports: [
-              CommonModule,
-              ReactiveFormsModule
-       ],
-       exports: [
-              FooterComponent,
-              NavbarComponent,
-              HeaderComponent
-       ]
+  declarations: [
+    FooterComponent,
+    NavbarComponent,
+    HeaderComponent,
+    HomeComponent,
+    SubscriptionComponent,
+    HowItWorksComponent,
+    ContactComponent,
+    LoginComponent,
+    RegisterComponent,
+    ChatbotComponent,
+    AccountComponent,
+  ],
+  imports: [CommonModule, ReactiveFormsModule],
+  exports: [FooterComponent, NavbarComponent, HeaderComponent],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

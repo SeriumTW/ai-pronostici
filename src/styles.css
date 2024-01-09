@@ -10,18 +10,19 @@ body {
 
 .glass-effect {
   backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.1);
 }
+
 .background-image {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   z-index: -1;
-  background-image: url(https://salmonsoccer.com/wp-content/uploads/42.jpg);
+  background-image: url(https://img.legaseriea.it/vimages/63453431/SERIE-A_RGB_Texture__3.jpg);
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* ===== Scrollbar CSS ===== */

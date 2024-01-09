@@ -13,7 +13,7 @@ export class AuthFacade implements OnDestroy {
   private subscriptions: Subscription = new Subscription();
 
   isLoggedIn$: Observable<boolean> = this.authStoreService.isLoggedIn$;
-  User$: Observable<User> = this.authStoreService.userData$;
+  User$: Observable<Partial<User>> = this.authStoreService.userData$;
   constructor(
     private router: Router,
     private authApiService: AuthApiService,
@@ -71,7 +71,7 @@ export class AuthFacade implements OnDestroy {
 
   register(user: User): void {
     user.img =
-      'https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg';
+      'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg';
 
     const registerSubscription = this.authApiService
       .register(user)
