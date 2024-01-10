@@ -7,16 +7,16 @@ import { User } from '../interfaces/user.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthApiService {
+export class AccountApiService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/login`, { email, password });
+  getUserByUsername(idUser: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${idUser}`);
   }
 
-  register(request: Partial<User>): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/register`, request);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
   }
 }

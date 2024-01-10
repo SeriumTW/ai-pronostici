@@ -1,7 +1,7 @@
 <ngx-ui-loader></ngx-ui-loader>
 
 <div class="flex flex-col min-h-screen">
-  <app-navbar></app-navbar>
+  <app-navbar *ngIf="!isAccountRoute"></app-navbar>
   <div class="flex-grow">
     <router-outlet></router-outlet>
   </div>

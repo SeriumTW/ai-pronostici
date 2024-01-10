@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user.interface';
+import { AccountApiService } from '../api/account-api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,8 @@ export class AuthFacade implements OnDestroy {
   constructor(
     private router: Router,
     private authApiService: AuthApiService,
+    private accountApiService: AccountApiService,
+
     private authStoreService: AuthStoreService
   ) {
     const token = localStorage.getItem('authToken');
@@ -94,7 +97,7 @@ export class AuthFacade implements OnDestroy {
   }
 
   getUserData(idUser: number): void {
-    const userDataSubscription = this.authApiService
+    const userDataSubscription = this.accountApiService
       .getUserByUsername(idUser)
       .pipe(
         map((user: User) => {

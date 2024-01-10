@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthFacade } from '../../facades/auth.facade';
 import { User } from '../../interfaces/user.interface';
@@ -8,7 +8,7 @@ import { User } from '../../interfaces/user.interface';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   registerForm: FormGroup;
 
   constructor(private authFacade: AuthFacade) {
@@ -20,8 +20,6 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', Validators.required),
     });
   }
-
-  ngOnInit(): void {}
 
   onRegister(): void {
     if (this.registerForm.valid) {

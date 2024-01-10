@@ -1,83 +1,97 @@
-<div class="container mx-auto p-4" *ngIf="userProfile$ | async as user">
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <h2 class="text-2xl mb-4 font-semibold text-gray-800">Profilo Utente</h2>
-    <div class="flex flex-wrap md:flex-nowrap gap-4">
-      <div
-        class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border border-gray-300"
+<div class="min-h-screen flex text-white">
+  <!-- Main content -->
+  <div class="flex-1 flex flex-col">
+    <div
+      class="bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md shadow p-3 flex justify-between items-center"
+    >
+      <button
+        (click)="goHome()"
+        href="#"
+        class="flex items-center justify-center block text-sm px-2 py-3 text-white bg-gradient-to-r bg-red-600 hover:bg-red-900 rounded text-center"
       >
+        <i class="fas fa-home mr-2"></i>
+        Torna alla home
+      </button>
+      <h1 class="text-xl font-semibold">Benvenuto, Account Page</h1>
+      <div>
+        <span class="text-sm">Hello Sami</span>
         <img
-          [src]="user.img"
-          alt="Profilo utente"
-          class="w-full h-full object-cover"
+          src="/path-to-your-profile-image.jpg"
+          alt="profile"
+          class="w-8 h-8 rounded-full"
         />
       </div>
-      <div class="flex-grow">
-        <div *ngIf="!isEditing">
-          <p>Nome: {{ user.firstname }}</p>
-          <p>Cognome: {{ user.lastname }}</p>
-          <p>Username: {{ user.username }}</p>
-          <p>Data Account: {{ user.startDate | date : "dd/MM/yyyy" }}</p>
-          <p>Email: {{ user.email }}</p>
-          <button
-            (click)="enableEditing()"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+    </div>
+    <!-- Header -->
+
+    <!-- Profile card -->
+    <div
+      class="m-5 bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md p-5 rounded-lg shadow flex justify-between"
+    >
+      <div>
+        <img
+          src="/path-to-your-profile-image.jpg"
+          alt="profile"
+          class="w-24 h-24 rounded-full"
+        />
+        <!-- Profile content here -->
+        <h2 class="text-lg font-semibold mt-4">Sami Hartman</h2>
+        <p class="text-sm text-gray-600">+1-858-569-082-1236</p>
+        <p class="text-sm text-gray-600">sami.hartmanexample.com</p>
+      </div>
+      <div>
+        <!-- SMS Alerts Toggle -->
+        <div class="flex items-center">
+          <span class="text-sm text-gray-600 mr-2">SMS alerts:</span>
+          <div
+            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
           >
-            Modifica
-          </button>
-        </div>
-        <div *ngIf="isEditing">
-          <form (ngSubmit)="onSubmit()">
-            <!-- Aggiungi qui i campi del form per la modifica -->
-            <button
-              type="submit"
-              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
-            >
-              Salva Modifiche
-            </button>
-          </form>
+            <input
+              type="checkbox"
+              name="toggle"
+              id="toggle"
+              class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md border-4 appearance-none cursor-pointer"
+            />
+            <label
+              for="toggle"
+              class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+            ></label>
+          </div>
+          <label for="toggle" class="text-xs text-gray-700">Enabled</label>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <h2 class="text-2xl mb-4 font-semibold text-gray-800">
-      Gestione Abbonamento
-    </h2>
-    <div class="mb-4">
-      <p class="text-gray-700 m-2">
-        Stato Abbonamento:
-        <span
-          [ngClass]="{
-            'bg-green-500': abbonamento.status === 'ATTIVO',
-            'bg-red-500': abbonamento.status === 'NON ATTIVO'
-          }"
-          class="py-1 px-2 rounded text-white text-sm"
-        >
-          {{ abbonamento.status }}
-        </span>
-      </p>
-      <p class="text-gray-700 m-2">
-        Membro dal:
-        <span class="bg-gray-500 py-1 px-2 rounded text-white text-sm">
-          {{ abbonamento.startDate | date : "dd/MM/yyyy" }}
-        </span>
-      </p>
-    </div>
-    <div class="flex gap-4">
-      <button
-        (click)="renewSubscription()"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    <!-- Accounts & Bills -->
+    <div class="flex-grow p-20 bg-white flex space-x-5">
+      <!-- Accounts -->
+      <div
+        class="w-1/2 bg-opacity-40 bg-blue-900 backdrop-filter backdrop-blur-md p-5 rounded-lg shadow"
       >
-        Sottoscrivi/Rinnova
-      </button>
-      <button
-        (click)="cancelSubscription()"
-        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        <h3 class="text-lg font-semibold mb-4">My xPay accounts</h3>
+        <ul>
+          <li class="mb-3 p-2 rounded hover:bg-gray-50">
+            Active account - 8430 2000 9825 4725
+          </li>
+          <!-- Add other accounts here -->
+        </ul>
+      </div>
+
+      <!-- Bills -->
+      <div
+        class="w-1/2 bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md p-5 rounded-lg shadow"
       >
-        Disdici
-      </button>
+        <h3 class="text-lg font-semibold mb-4">My bills</h3>
+        <ul>
+          <li
+            class="mb-3 p-2 rounded hover:bg-gray-50 flex justify-between items-center"
+          >
+            Phone bill
+            <span class="text-xs font-semibold text-green-500">Paid</span>
+          </li>
+          <!-- Add other bills here -->
+        </ul>
+      </div>
     </div>
   </div>
-  >
 </div>

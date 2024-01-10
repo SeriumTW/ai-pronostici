@@ -12,6 +12,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class AppComponent implements OnInit {
   title = 'web-app';
+  isAccountRoute = false;
 
   constructor(private ngxService: NgxUiLoaderService, private router: Router) {}
 
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationStart) {
         this.ngxService.start();
       } else if (event instanceof NavigationEnd) {
+        this.isAccountRoute = event.urlAfterRedirects.includes('account');
         this.ngxService.stop();
       }
     });
