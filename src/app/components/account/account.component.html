@@ -2,7 +2,7 @@
   <!-- Main content -->
   <div class="flex-1 flex flex-col">
     <div
-      class="bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md shadow p-3 flex justify-between items-center"
+      class="bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md shadow-2xl p-3 flex justify-between items-center"
     >
       <button
         (click)="goHome()"
@@ -26,7 +26,7 @@
 
     <!-- Profile card -->
     <div
-      class="m-5 bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md p-5 rounded-lg shadow flex justify-between"
+      class="m-5 bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md p-5 rounded-lg shadow-2xl flex justify-between"
     >
       <div>
         <img
@@ -62,35 +62,167 @@
       </div>
     </div>
 
-    <!-- Accounts & Bills -->
-    <div class="flex-grow p-20 bg-white flex space-x-5">
-      <!-- Accounts -->
+    <div class="flex-grow p-12 flex flex-col space-y-5 bg-white">
+      <!-- Abbonamento Mensile -->
       <div
-        class="w-1/2 bg-opacity-40 bg-blue-900 backdrop-filter backdrop-blur-md p-5 rounded-lg shadow"
+        class="bg-white backdrop-filter text-black backdrop-blur-md p-5 rounded-lg shadow-2xl"
       >
-        <h3 class="text-lg font-semibold mb-4">My xPay accounts</h3>
-        <ul>
-          <li class="mb-3 p-2 rounded hover:bg-gray-50">
-            Active account - 8430 2000 9825 4725
-          </li>
-          <!-- Add other accounts here -->
-        </ul>
+        <h2 class="text-xl text-orange-600 font-semibold mb-4">
+          Il Tuo Abbonamento
+        </h2>
+        <!-- Dettagli Abbonamento -->
+        <div class="mb-4">
+          <p class="text-gray-700">
+            Stato Abbonamento: <span class="font-semibold">Attivo</span>
+          </p>
+          <p class="text-gray-700">
+            Piano Corrente: <span class="font-semibold">Premium</span>
+          </p>
+          <p class="text-gray-700">
+            Prossimo Rinnovo: <span class="font-semibold">24 Luglio 2024</span>
+          </p>
+        </div>
+
+        <!-- Opzioni Abbonamento -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h4 class="text-lg font-semibold mb-2">Vantaggi del Piano</h4>
+            <ul class="list-disc list-inside text-orange-600">
+              <li>Accesso illimitato a tutte le funzionalità</li>
+              <li>30 GB di spazio di archiviazione</li>
+              <!-- Altri vantaggi possono essere aggiunti qui -->
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold mb-2">Modifica Piano</h4>
+            <p class="text-gray-600 mb-4">
+              Esplora e passa a diversi piani di abbonamento in base alle tue
+              esigenze.
+            </p>
+            <button
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Cambia Piano
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Bills -->
+      <!-- Accounts -->
       <div
-        class="w-1/2 bg-opacity-40 bg-gray-900 backdrop-filter backdrop-blur-md p-5 rounded-lg shadow"
+        class="flex flex-col space-y-5 md:flex-row md:space-x-5 md:space-y-0"
       >
-        <h3 class="text-lg font-semibold mb-4">My bills</h3>
-        <ul>
-          <li
-            class="mb-3 p-2 rounded hover:bg-gray-50 flex justify-between items-center"
-          >
-            Phone bill
-            <span class="text-xs font-semibold text-green-500">Paid</span>
-          </li>
-          <!-- Add other bills here -->
-        </ul>
+        <div
+          class="md:w-1/2 text-black bg-white backdrop-filter backdrop-blur-md p-5 rounded-lg shadow-2xl"
+        >
+          <h3 class="text-xl font-semibold mb-4">Impostazioni Account</h3>
+
+          <!-- Interruttore per Avvisi SMS -->
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-gray-700">Avvisi SMS</span>
+            <label
+              for="sms-toggle"
+              class="inline-flex relative items-center cursor-pointer"
+            >
+              <input type="checkbox" id="sms-toggle" class="sr-only peer" />
+              <div
+                class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 transition duration-300 ease-in-out after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full peer-checked:bg-blue-600"
+              ></div>
+            </label>
+          </div>
+
+          <!-- Cambio Password -->
+          <div class="mb-4">
+            <label for="password" class="block text-gray-700 mb-2"
+              >Nuova Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              class="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div>
+            <label for="confirm-password" class="block text-gray-700 mb-2"
+              >Conferma Nuova Password</label
+            >
+            <input
+              type="password"
+              id="confirm-password"
+              class="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+
+          <!-- Bottone di Aggiornamento -->
+          <div class="mt-6">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Aggiorna Impostazioni
+            </button>
+          </div>
+        </div>
+
+        <!-- Pagamenti recenti -->
+        <div
+          class="p-5 md:w-1/2 text-black bg-white backdrop-filter backdrop-blur-md rounded-lg shadow-2xl"
+        >
+          <h3 class="text-xl font-semibold mb-4">Sicurezza Account</h3>
+
+          <!-- Cambio Password con Validazione -->
+          <div class="mb-6">
+            <h4 class="text-lg font-semibold mb-2">Cambio Password</h4>
+            <form id="password-change-form">
+              <div class="mb-4">
+                <label for="current-password" class="block text-gray-700 mb-2"
+                  >Password Attuale</label
+                >
+                <input
+                  type="password"
+                  id="current-password"
+                  class="w-full p-2 border border-gray-300 rounded"
+                  placeholder="Inserisci password attuale"
+                  required
+                />
+              </div>
+
+              <div class="mb-4">
+                <label for="new-password" class="block text-gray-700 mb-2"
+                  >Nuova Password</label
+                >
+                <input
+                  type="password"
+                  id="new-password"
+                  class="w-full p-2 border border-gray-300 rounded"
+                  placeholder="Inserisci nuova password"
+                  required
+                />
+              </div>
+
+              <div class="mb-6">
+                <label
+                  for="confirm-new-password"
+                  class="block text-gray-700 mb-2"
+                  >Conferma Nuova Password</label
+                >
+                <input
+                  type="password"
+                  id="confirm-new-password"
+                  class="w-full p-2 border border-gray-300 rounded"
+                  placeholder="Conferma nuova password"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Cambia Password
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

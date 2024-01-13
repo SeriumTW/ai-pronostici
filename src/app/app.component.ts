@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
-import { initFlowbite } from 'flowbite';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
@@ -17,8 +16,6 @@ export class AppComponent implements OnInit {
   constructor(private ngxService: NgxUiLoaderService, private router: Router) {}
 
   ngOnInit(): void {
-    initFlowbite();
-
     this.ngxService.start(); // start foreground spinner of the master loader with 'default' taskId
     // Stop the foreground loading after 5s
     setTimeout(() => {
